@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', getPosts)
 router.post('/', createPost)
-router.patch('/id', updatePost)
+router.put('/:id', updatePost)
 
 
 export default router
