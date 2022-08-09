@@ -29,7 +29,7 @@ const Navbar = () => {
 				<Button variant='contained' className={classes.logout} color='secondary'>Logout</Button>
 			</div>
 		) : (
-			<Button component={Link} to='/auth' variant='contained' color='primary'>Login</Button>
+			<Button component={Link} to='/Memories-App-Client/auth' variant='contained' color='primary'>Login</Button>
 		)}
 		</Toolbar>
       </AppBar>
