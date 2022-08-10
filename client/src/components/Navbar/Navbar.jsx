@@ -12,7 +12,7 @@ const Navbar = () => {
 	<div>
 		<AppBar className={classes.appBar} position='static' color='inherit'>
         <div className={classes.brandContainer}>
-		<Typography component={Link} to='/' className={classes.header} variant='h2' align='center'>Memories</Typography>
+		<Typography component={Link} to='/Memories-App-Client' className={classes.header} variant='h2' align='center'>Memories</Typography>
         <img className={classes.image} src={memories} alt='memories' height='100' />
 		</div>
 		<Toolbar className={classes.toolbar}>
