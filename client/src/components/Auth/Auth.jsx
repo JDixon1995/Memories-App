@@ -36,7 +36,6 @@ const Auth = () => {
 	}
 
 	const handleChange = (e) => setAuthForm({ ...authForm, [e.target.name]: e.target.value })
-		console.log(authForm)
 
 	const switchMode = () => {
 		setAuthForm(authForm)
