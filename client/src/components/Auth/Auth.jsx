@@ -1,27 +1,49 @@
 import { useState } from 'react'
 import { Avatar, Button, Paper, Grid, Typography, Container } from  '@material-ui/core'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import Input from './Input'
 import useStyles from './styles'
 
+
 const Auth = () => {
-	const classes = useStyles()
-	const [ showPassword, setShowPassword] = useState(false)
+	
+	const [ authForm, setAuthForm ] = useState(
+		{ 
+		firstName: '', 
+		lastName: '', 
+		email: '', 
+		password: '', 
+		confirmPassword: '' 
+	})
 	const [ isSignUp, setIsSignUp] = useState(false)
 
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const classes = useStyles()
+
+	const [ showPassword, setShowPassword] = useState(false)
 	const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
 
-	const handleSubmit = () => {
-		console.log('clicked')
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		if (isSignUp) {
+		  dispatch();
+		} else {
+		  dispatch();
+		}
 	}
 
-	const handleChange = () => {
-		console.log('changed')
-	}
+	const handleChange = (e) => setAuthForm({ ...authForm, [e.target.name]: e.target.value })
+		console.log(authForm)
 
 	const switchMode = () => {
+		setAuthForm(authForm)
 		setIsSignUp((prevIsSignUp) => !prevIsSignUp)
 		handleShowPassword(false)
 	}
+	
   return (
 	<Container component='main' maxWidth='xs'>
 		<Paper className={classes.paper} elevation={3}>
@@ -39,7 +61,7 @@ const Auth = () => {
 							</>
 						)}
 						<Input name='email' label="Email Address" type='email' handleChange={handleChange} autoFocus/>
-						<Input name='password' label="Password" type={showPassword ? 'text' : 'password'} handleChange={handleChange} handleShowPassword={handleShowPassword} autoFocus/>
+						<Input name='password' label="Password" type={showPassword ? 'text' : 'password'} handleChange={handleChange} handleShowPassword={handleShowPassword} />
 						{ isSignUp && <Input name='confirmPassword' label="Repeat Password" handleChange={handleChange} type='password' />}
 				</Grid>
 			<Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>

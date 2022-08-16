@@ -10,7 +10,7 @@ justifyContent: 'space-between',
 alignItems: 'center',
 padding: '10px 50px',
 },
-heading: {
+header: {
 color: 'rgba(0,183,255, 1)',
 textDecoration: 'none',
 },
