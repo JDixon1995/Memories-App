@@ -25,7 +25,17 @@ const UserSchema = new mongoose.Schema({
 	resetPasswordToken: String,
 	resetPasswordExpire: Date,
   });
+  
+// hash the password
+UserSchema.pre('save', async function(next) {
+	if(!this.isModified('password')){
+		next()
+	}
 
-  const User = mongoose.model("User", UserSchema);
+	const salt = await bcrypt.genSalt(10)
+	this.password = await bcrypt.hash(this.password, salt)
+})
+
+const User = mongoose.model("User", UserSchema);
 
 module.exports = User
