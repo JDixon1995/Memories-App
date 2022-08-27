@@ -1,6 +1,6 @@
-const User = require('../models/User')
+import User from '../models/User.js'
 
-exports.register = async (req, res, next) => {
+export const register = async (req, res, next) => {
 	const {username, email, password} = req.body
 
 	try {
@@ -13,21 +13,21 @@ exports.register = async (req, res, next) => {
 			user: user
 		})
 	} catch (error) {
-		res.stat(us(500).json({
+		res.status(500).json({
 			success: false,
 			error: error.message
-		}))
+		})
 	}
 }
 
-exports.login = (req, res, next) => {
+export const login = (req, res, next) => {
 	res.send('Login Route')
 }
 
-exports.forgotPassword = (req, res, next) => {
+export const forgotPassword = (req, res, next) => {
 	res.send('Forgot Password Route')
 }
 
-exports.resetPassword = (req, res, next) => {
+export const resetPassword = (req, res, next) => {
 	res.send('Reset Password Route')
 }

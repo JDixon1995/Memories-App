@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv'
 import postRoutes from './routes/posts.js'
+import authRoutes from './routes/auth.js'
 
 dotenv.config()
 
@@ -16,6 +17,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/posts', postRoutes)
+app.use('/user', authRoutes)
 
 app.get('/', (req, res) => {
 	res.send('Hello Memories API.')

@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
+import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
+import bcrypt from 'bcryptjs'
 
 const UserSchema = new mongoose.Schema({
 	username: {
@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
 	resetPasswordToken: String,
 	resetPasswordExpire: Date,
   });
-  
+
 // hash the password
 UserSchema.pre('save', async function(next) {
 	if(!this.isModified('password')){
@@ -34,8 +34,9 @@ UserSchema.pre('save', async function(next) {
 
 	const salt = await bcrypt.genSalt(10)
 	this.password = await bcrypt.hash(this.password, salt)
+	next()
 })
 
 const User = mongoose.model("User", UserSchema);
 
-module.exports = User
+export default User
