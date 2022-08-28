@@ -17,7 +17,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/posts', postRoutes)
-app.use('/user', authRoutes)
+app.use('/auth', authRoutes)
 
 app.get('/', (req, res) => {
 	res.send('Hello Memories API.')
