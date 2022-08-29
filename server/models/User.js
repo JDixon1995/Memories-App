@@ -11,10 +11,6 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: [true, "Please enter your name"],
 	},
-	username: {
-	  type: String,
-	  required: [true, "Please provide username"],
-	},
 	email: {
 	  type: String,
 	  required: [true, "Please provide email address"],
@@ -44,6 +40,10 @@ UserSchema.pre('save', async function(next) {
 	this.password = await bcrypt.hash(this.password, salt)
 	next()
 })
+
+UserSchema.methods.matchPasswords = async function(password) {
+	return await bcrypt.compare(password, this.password)
+}
 
 const User = mongoose.model("User", UserSchema);
 
