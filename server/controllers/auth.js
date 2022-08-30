@@ -1,4 +1,5 @@
 import User from '../models/User.js'
+import ErrorResponse from '../utils/errorResponse.js'
 
 export const register = async (req, res, next) => {
 	const {firstName, lastName, email, password} = req.body
@@ -13,10 +14,7 @@ export const register = async (req, res, next) => {
 			user: user
 		})
 	} catch (error) {
-		res.status(500).json({
-			success: false,
-			error: error.message
-		})
+		next(error)
 	}
 }
 
@@ -24,10 +22,7 @@ export const login = async (req, res, next) => {
 	const {email, password} = req.body
 
 	if(!email || !password) {	
-		res.status(400).json({
-			success: false,
-			error: 'Please provide email and password.'
-		})
+		return next(new ErrorResponse("Please provide an email and password"))
 	}
 
 	try {
@@ -54,10 +49,7 @@ export const login = async (req, res, next) => {
 			token: "12121234"
 		})
 	} catch (error) {
-		res.status(500).json({
-			success: false,
-			error: error.message
-		})
+		next(err)
 	}
 }
 

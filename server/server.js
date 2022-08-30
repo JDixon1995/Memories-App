@@ -5,7 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv'
 import postRoutes from './routes/posts.js'
 import authRoutes from './routes/auth.js'
-import errorHandler from './middleware/error'
+import errorHandler from './middleware/error.js'
 
 dotenv.config()
 

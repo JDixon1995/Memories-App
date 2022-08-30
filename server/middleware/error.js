@@ -1,4 +1,4 @@
-import ErrorReponse from '../utils/errorResponse'
+import ErrorResponse from '../utils/errorResponse.js'
 
 const errorHandler = (err, req, res, next) => {
 	let error = { ...err }
@@ -7,12 +7,12 @@ const errorHandler = (err, req, res, next) => {
 
 	if(err.code === 11000) {
 		const message = 'Duplicate Field value entered'
-		error = new ErrorReponse(message, 400)
+		error = new ErrorResponse(message, 400)
 	}
 
 	if(err.name === 'ValidationError') {
 		const message = Object.values(err.errors).map((val) => val.message)
-		error = new ErrorReponse(message, 400)
+		error = new ErrorResponse(message, 400)
 	}
 
 	console.log(error.message)
@@ -23,4 +23,4 @@ const errorHandler = (err, req, res, next) => {
 	})
 }
 
-module.exports = errorHandler
+export default errorHandler
