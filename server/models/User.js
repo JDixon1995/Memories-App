@@ -1,3 +1,4 @@
+import crypto from 'crypto'
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
@@ -44,6 +45,21 @@ UserSchema.pre('save', async function(next) {
 UserSchema.methods.matchPasswords = async function(password) {
 	return await bcrypt.compare(password, this.password)
 }
+
+UserSchema.methods.getResetPasswordToken = function () {
+	const resetToken = crypto.randomBytes(20).toString("hex");
+  
+	// Hash token (private key) and save to database
+	this.resetPasswordToken = crypto
+	  .createHash("sha256")
+	  .update(resetToken)
+	  .digest("hex");
+  
+	// Set token expire date
+	this.resetPasswordExpire = Date.now() + 10 * (60 * 1000); // Ten Minutes
+  
+	return resetToken;
+  }
 
 const User = mongoose.model("User", UserSchema);
 
