@@ -22,26 +22,20 @@ export const login = async (req, res, next) => {
 	const {email, password} = req.body
 
 	if(!email || !password) {	
-		return next(new ErrorResponse("Please provide an email and password"))
+		return next(new ErrorResponse("Please provide an email and password", 400))
 	}
 
 	try {
 		const user = await User.findOne({ email }).select('+password')
 
 		if(!user) {
-			res.status(404).json({
-				success: false,
-				error: 'Invalid Credentials'
-			})
+			return next(new ErrorResponse('Invalid Credentials', 401))
 		}
 
 		const isMatch = await user.matchPasswords(password)
 
 		if(!isMatch) {
-			res.status(404).json({
-				success: false,
-				error: 'Invalid Credentials'
-			})
+			return next(new ErrorResponse('Invalid Credentials', 401))
 		}
 
 		res.status(200).json({
