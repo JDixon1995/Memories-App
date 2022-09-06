@@ -61,8 +61,10 @@ UserSchema.methods.getResetPasswordToken = function () {
 	return resetToken;
   }
 
-UserSchema.methods.getSignedToken = async function () {
-	return jwt.sign({ id: this._id}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE} )
+UserSchema.methods.getSignedToken = function () {
+	return jwt.sign({ id: this._id}, process.env.JWT_SECRET, { 
+		expiresIn: '30d',
+	})
 }
 
 const User = mongoose.model("User", UserSchema);

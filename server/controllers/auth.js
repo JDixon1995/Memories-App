@@ -9,10 +9,7 @@ export const register = async (req, res, next) => {
 			firstName, lastName, email, password
 		})
 
-		res.status(201).json({
-			success: true,
-			token: "12121234"
-		})
+		sendToken(user, 201, res)
 	} catch (error) {
 		next(error)
 	}
@@ -38,10 +35,7 @@ export const login = async (req, res, next) => {
 			return next(new ErrorResponse('Invalid Credentials', 401))
 		}
 
-		res.status(200).json({
-			success: true,
-			token: "12121234"
-		})
+		sendToken(user, 200, res)
 	} catch (error) {
 		next(err)
 	}
