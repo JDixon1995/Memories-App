@@ -11,7 +11,7 @@ export const register = async (req, res, next) => {
 
 		res.status(201).json({
 			success: true,
-			user: user
+			token: "12121234"
 		})
 	} catch (error) {
 		next(error)
@@ -98,4 +98,12 @@ export const forgotPassword = async (req, res, next) => {
 
 export const resetPassword = (req, res, next) => {
 	res.send('Reset Password Route')
+}
+
+const sendToken = (user, statusCode, res) => {
+	const token = user.getSignedToken()
+	res.status(statusCode).json({
+		success: true,
+		token: token
+	})
 }
