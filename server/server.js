@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv'
 import postRoutes from './routes/posts.js'
 import authRoutes from './routes/auth.js'
+import privateRoutes from './routes/private.js'
 import errorHandler from './middleware/error.js'
 
 dotenv.config()
@@ -19,6 +20,7 @@ app.use(cors())
 
 app.use('/posts', postRoutes)
 app.use('/auth', authRoutes)
+app.use('/private', privateRoutes)
 
 app.get('/', (req, res) => {
 	res.send('Hello Memories API.')
