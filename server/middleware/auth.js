@@ -1,4 +1,5 @@
 import jwr from 'jsonwebtoken'
+import ErrorResponse from '../utils/errorResponse.js';
 import User from '../models/User.js'
 
 
