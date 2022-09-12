@@ -1,9 +1,9 @@
 import jwr from 'jsonwebtoken'
-import User from '../models/user.js'
+import User from '../models/User.js'
 
 
 
-export default protect = async (req, res, next) => {
+export const protect = async (req, res, next) => {
 	let token;
 
   if (
