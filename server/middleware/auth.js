@@ -1,4 +1,4 @@
-import jwr from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import ErrorResponse from '../utils/errorResponse.js';
 import User from '../models/User.js'
 
@@ -31,6 +31,7 @@ export const protect = async (req, res, next) => {
 
     next();
   } catch (err) {
+    console.log(err)
     return next(new ErrorResponse("Not authorized to access this router", 401));
   }
 }
